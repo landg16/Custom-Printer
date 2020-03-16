@@ -14,6 +14,9 @@
   "author": "Lasha Andghuladze",
   "license": "MIT",
   "dependencies": {
+    "esc-pos-encoder": "^1.2.0",
+    "escpos": "^3.0.0-alpha.2",
+    "png-js": "^1.0.0",
     "serialport": "^8.0.7"
   }
 }
