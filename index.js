@@ -1,10 +1,11 @@
+const fs = require('fs');
 const SerialPort = require('serialport')
 const Canvas = require('canvas-browserify')
 const Dither = require('canvas-dither')
 const Flatten = require('canvas-flatten')
 
 const port = new SerialPort('/dev/tty.usbserial-1420', {
-  baudRate: 19200
+  baudRate: 115200
 })
 
 function hex(str) {
@@ -21,75 +22,82 @@ function hex(str) {
 }
 
 port.on('open', function() {
-    setCenter()
-    defineBitImage('./logo.png', 512, 128).then(() => {
-        printDefinedBitImage()
+    // saveAsLogo("./niko-2.jpg", "ragaca.jpg", 720, 960, 3)
+        write(Buffer.from([0x1C, 0x93, 0x00, 0x03, 0x01, 0x00, 0x00, 0x00]))
+    // })
+    // resetBuffer()
+    // // setFontEncoding(0x01)
+    // setCharacterFont()
+    // // loadFont("alk-sanet-webfont.ttf", "./alk-sanet-webfont.ttf")
+    // // write(Buffer.from([0x1C, 0x66, 0x03]))
+    // // write(Buffer.from(["alk-sanet-webfont.ttf".length]))
+    // // write(Buffer.from("alk-sanet-webfont.ttf"))
+    //     setCenter()
+    //     printRasterBitImage('./logo.png', 512, 128).then(() => {
 
-        // resetBuffer()
+         //    setFontSizeX(2)
+         //    setBold()
+         //    setLeft()
+        	// setLeftMargin(0x40)
+         //    setDensity(1);
 
-     //    setFontSizeX(2)
-     //    setBold()
-     //    setLeft()
-    	// setLeftMargin(0x40)
-     //    setDensity(1);
+         //    printAndFeedN(0x04)
 
-     //    printAndFeedN(0x02)
+         //    printNormalText("RECEIPT")
+         //    printAndFeedN(0x02)
 
-     //    printNormalText("RECEIPT")
-     //    printAndFeedN(0x02)
+         //    setFontSizeX(1)
+         //    printNormalText("Martian Moon Money")
+         //    printAndFeedN(0x00)
+         //    printNormalText("MartianMoonMoney.space")
+         //    printAndFeedN(0x00)
+         //    printNormalText("elon@martianmoonmoney.space")
+         //    printAndFeedN(0x00)
+         //    printNormalText("+4.603.867.5309")
+         //    printAndFeedN(0x00)
+         //    printNormalText("VAT No. NCC - 74656")
+         //    printAndFeedN(0x02)
 
-     //    setFontSizeX(1)
-     //    printNormalText("Martian Moon Money")
-     //    printAndFeedN(0x00)
-     //    printNormalText("MartianMoonMoney.space")
-     //    printAndFeedN(0x00)
-     //    printNormalText("elon@martianmoonmoney.space")
-     //    printAndFeedN(0x00)
-     //    printNormalText("+4.603.867.5309")
-     //    printAndFeedN(0x00)
-     //    printNormalText("VAT No. NCC - 74656")
-     //    printAndFeedN(0x02)
+         //    printNormalText("Customer: + 18025853170")
+         //    printAndFeedN(0x00)
+         //    printNormalText("Session:")
+         //    printAndFeedN(0x00)
+         //    setLeftMargin(0x60)
+         //    printNormalText("0f6851-7edb-4664-b2c9-496fe700a5a3")
+         //    printAndFeedN(0x02)
 
-     //    printNormalText("Customer: + 18025853170")
-     //    printAndFeedN(0x00)
-     //    printNormalText("Session:")
-     //    printAndFeedN(0x00)
-     //    setLeftMargin(0x60)
-     //    printNormalText("0f6851-7edb-4664-b2c9-496fe700a5a3")
-     //    printAndFeedN(0x02)
+         //    setLeftMargin(0x40)
+         //    printNormalText("Time: 2020-03-13 23:40:22 UTC")
+         //    printAndFeedN(0x00)
+         //    printNormalText("Direction: Cash-in")
+         //    printAndFeedN(0x00)
+         //    printNormalText("Fiat: 50EUR")
+         //    printAndFeedN(0x00)
+         //    printNormalText("Crypto: 0.006306 BTC")
+         //    printAndFeedN(0x00)
+         //    printNormalText("Rate: 1 BTC = 7930.5135 EUR")
+         //    printAndFeedN(0x02)
+            
+         //    printNormalText("TXID:")
+         //    printAndFeedN(0x00)
+         //    setLeftMargin(0x60)
+         //    printNormalText("f483b2112a3966056792bf679a2202cb")
+         //    printAndFeedN(0x00)
+         //    printNormalText("884ed6ecfb535674c9f33cda268a0a34")
+         //    printAndFeedN(0x02)
+         //    setLeftMargin(0x40)
+         //    printNormalText("Address:")
+         //    printAndFeedN(0x00)
+         //    setLeftMargin(0x60)
+         //    printNormalText("1FfmbHfnpaZjKFvyi")
+         //    printAndFeedN(0x00)
+         //    printNormalText("1okTjJJusN455paPH")
+         //    printAndFeedN(0x04)
 
-     //    setLeftMargin(0x40)
-     //    printNormalText("Time: 2020-03-13 23:40:22 UTC")
-     //    printAndFeedN(0x00)
-     //    printNormalText("Direction: Cash-in")
-     //    printAndFeedN(0x00)
-     //    printNormalText("Fiat: 50EUR")
-     //    printAndFeedN(0x00)
-     //    printNormalText("Crypto: 0.006306 BTC")
-     //    printAndFeedN(0x00)
-     //    printNormalText("Rate: 1 BTC = 7930.5135 EUR")
-     //    printAndFeedN(0x02)
-        
-     //    printNormalText("TXID:")
-     //    printAndFeedN(0x00)
-     //    setLeftMargin(0x60)
-     //    printNormalText("f483b2112a3966056792bf679a2202cb")
-     //    printAndFeedN(0x00)
-     //    printNormalText("884ed6ecfb535674c9f33cda268a0a34")
-     //    printAndFeedN(0x02)
-     //    setLeftMargin(0x40)
-     //    printNormalText("Address:")
-     //    printAndFeedN(0x00)
-     //    setLeftMargin(0x60)
-     //    printNormalText("1FfmbHfnpaZjKFvyi")
-     //    printAndFeedN(0x00)
-     //    printNormalText("1okTjJJusN455paPH")
-     //    printAndFeedN(0x04)
-
-     //    printQR("1FfmbHfnpaZjKFvyi1okTjJJusN455paPH")
-     //    print()
-    	cutPaper()
-    })
+         //    printQR("1FfmbHfnpaZjKFvyi1okTjJJusN455paPH")
+            print()
+        	cutPaper()
+    //     })
 })
 
 port.on('data', function(data) {
@@ -103,6 +111,66 @@ port.on('readable', function () {
 port.on('error', function(err) {
 	console.log('Error: ', err.message)
 })
+
+function setCharacterFont(){
+    write(Buffer.from([0x1B, 0x4D, 0x31]))
+}
+
+//0x00 - DISABLED
+//0x01 - ENABLE UTF-8
+//0x02 - ENABLE UTF-16
+function setFontEncoding(encoding) {
+    write(Buffer.from([0x1C, 0x65, encoding]))
+}
+
+function loadFont(fontName, fontPath) {
+    const fileSize = getFilesizeInBytes(fontPath);
+    const fileBytes = getFileByteArray(fontPath);
+    // return fileBytes.then((fileBytes) => {
+        write(Buffer.from([0x1D, 0xE9]))
+        write(fileSize);
+        write(Buffer.from([0x2C, 0x43, 0x2C]));
+        write(Buffer.from(fontName));
+        write(Buffer.from([0x2C]));
+        write(fileBytes);
+    // })
+}
+
+function getFilesizeInBytes(filePath) {
+    const stats = fs.statSync(filePath);
+    const fileSizeInBytes = stats.size;
+    return Buffer.from([fileSizeInBytes >> 24, fileSizeInBytes >> 16, fileSizeInBytes >> 8, fileSizeInBytes])
+}
+
+function getFileByteArray(filePath){
+    return fs.readFileSync(filePath);
+}
+
+function saveAsLogo(filePath, fileName, width, height, logoNumber) {
+    write(Buffer.from([0x1C, 0x94])) // Save the image from serial port command
+    write(calculateHL(logoNumber)) // nH, nL. The number of logo as two byte.
+    write(calculateHL(width)) // Image width as two byte.
+    write(calculateHL(height)) // Imahe height as two byte.
+    write(Buffer.from([0x00, 0x00])) // Two reserved byte.
+    write(create16String(fileName)) // 16 Size string as name of logo.
+    encodeImageForLogo(filePath, width, height)
+    // write(getFileByteArray(filePath)) // File byte array
+    // write(Buffer.from([0x3E])) // End byte
+
+}
+
+function create16String(str) {
+    let buff = Buffer.alloc(16);
+    buff.fill(0x00);
+    buff.write(str);
+    return buff;
+}
+
+function calculateHL(number) {
+    let nL = Math.floor(number % 256);
+    let nH = Math.floor(number / 256);
+    return Buffer.from([nH, nL]);
+}
 
 // normal density is 0, which in commands is 0x04.
 function setDensity(density) {
@@ -132,13 +200,62 @@ function printRasterBitImage(imagePath, width, height) {
 function defineBitImage(imagePath, width, height) {
     let imageBytes = encodeImageColumns(imagePath, width, height)
     return imageBytes.then((image) => {
-        const command = Buffer.from([0x1D, 0x2A, height/8, width/8])
+        const command = Buffer.from([0x1D, 0x2A, width/8, height/8])
         write(Buffer.concat([command, image]))
     });
 }
 
 function printDefinedBitImage() {
     write(Buffer.from([0x1D, 0x2F, 0x30]))
+}
+
+function encodeImageForLogo(imagePath, width, height) {
+    if (width % 16 !== 0) {
+        throw new Error('Width must be a multiple of 8');
+    }
+
+    if (height % 16 !== 0) {
+        throw new Error('Height must be a multiple of 8');
+    }
+
+    let canvas = Canvas.createCanvas(width, height);
+    let context = canvas.getContext('2d');
+    const background = Canvas.loadImage(imagePath);
+    const result =  background.then((background) => {
+        context.drawImage(background, 0, 0, width, height);
+        let image = context.getImageData(0, 0, width, height);
+
+        image = Flatten.flatten(image, [0xff, 0xff, 0xff]);
+
+        // image = Dither.threshold(image, 128);
+        // image = Dither.bayer(image, 128);
+        // image = Dither.floydsteinberg(image);
+        image = Dither.atkinson(image);
+        
+        let getPixel = (x, y) => image.data[((width * y) + x) * 4] > 0 ? 0 : 1;
+
+        let bytes = new Uint8Array((width * height) / 8);
+
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x = x + 8) {
+                let i = (y * (width / 8)) + (x / 8);
+                bytes[i] =
+                    getPixel(x + 0, y) << 7 |
+                    getPixel(x + 1, y) << 6 |
+                    getPixel(x + 2, y) << 5 |
+                    getPixel(x + 3, y) << 4 |
+                    getPixel(x + 4, y) << 3 |
+                    getPixel(x + 5, y) << 2 |
+                    getPixel(x + 6, y) << 1 |
+                    getPixel(x + 7, y);
+            }
+        }
+
+        write(Buffer.from(bytes))
+        write(Buffer.from([0x3E]))
+    }).catch(err => {
+        console.log('oh no!', err)
+    })
 }
 
 function encodeImageColumns(imagePath, width, height) {
@@ -153,17 +270,16 @@ function encodeImageColumns(imagePath, width, height) {
     let canvas = Canvas.createCanvas(width, height);
     let context = canvas.getContext('2d');
     const background = Canvas.loadImage(imagePath);
-
     const result =  background.then((background) => {
         context.drawImage(background, 0, 0, width, height);
         let image = context.getImageData(0, 0, width, height);
 
         image = Flatten.flatten(image, [0xff, 0xff, 0xff]);
 
-        // image = Dither.threshold(image, threshold);
-        // image = Dither.bayer(image, threshold);
-        image = Dither.floydsteinberg(image);
-        // image = Dither.atkinson(image);
+        // image = Dither.threshold(image, 128);
+        // image = Dither.bayer(image, 128);
+        // image = Dither.floydsteinberg(image);
+        image = Dither.atkinson(image);
 
         let getPixel = (x, y) => image.data[((width * y) + x) * 4] > 0 ? 0 : 1;
 
@@ -173,28 +289,17 @@ function encodeImageColumns(imagePath, width, height) {
             for (let x = 0; x < width; x = x + 8) {
                 let i = ((height - y) * (width / 8)) + (x / 8);
                 bytes[i] =
-                    getPixel(x + 0, y) |
-                    getPixel(x + 1, y) << 1 |
-                    getPixel(x + 2, y) << 2 |
-                    getPixel(x + 3, y) << 3 |
-                    getPixel(x + 4, y) << 4 |
-                    getPixel(x + 5, y) << 5 |
-                    getPixel(x + 6, y) << 6 |
-                    getPixel(x + 7, y) << 7;
+                    getPixel(x + 0, y) << 7 |
+                    getPixel(x + 1, y) << 6 |
+                    getPixel(x + 2, y) << 5 |
+                    getPixel(x + 3, y) << 4 |
+                    getPixel(x + 4, y) << 3 |
+                    getPixel(x + 5, y) << 2 |
+                    getPixel(x + 6, y) << 1 |
+                    getPixel(x + 7, y);
             }
         }
-        width = width/8
-        let transposedArray = new Uint8Array((width * height));
-        for (let y = 0; y < height; y++) {
-            for (let x = 0; x < width; x++) {
-                let i = (y * width) + x
-                let j = (width - x - 1) * height + y
-                transposedArray[j] = bytes[i]
-            }
-        }
-
-        // console.log(bytes.length)
-        return transposedArray
+        return bytes
     }).catch(err => {
         console.log('oh no!', err)
     })
@@ -325,7 +430,8 @@ function printNormalText(str) {
 }
 
 function cutPaper() {
-	write(Buffer.from([0x1C, 0x50, 0x0A, 0x01, 0x45, 0x05]))
+    // write(Buffer.from([0x1B, 0x69]))
+    write(Buffer.from([0x1C, 0x50, 0x0A, 0x01, 0x52, 0x05]))
 }
 
 function write(data) {
