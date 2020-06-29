@@ -4,7 +4,7 @@ const Canvas = require('canvas-browserify')
 const Dither = require('canvas-dither')
 const Flatten = require('canvas-flatten')
 
-const port = new SerialPort('/dev/ttyUSB1', {
+const port = new SerialPort('/dev/ttyUSB0', {
   baudRate: 115200
 })
 
@@ -28,6 +28,7 @@ port.on('open', function() {
     setCharacterFont()
     setCenter()
     printRasterBitImage(__dirname + '/logo.png', 512, 128).then(() => {
+	setCharacterSpacing()
         setFontSizeX(2)
         setBold()
         setLeft()
@@ -72,18 +73,16 @@ port.on('open', function() {
         printNormalText("Rate: ")
         printAndFeedN(0x02)
 
-        if (data.txId) {
             printNormalText("TXID:")
             printAndFeedN(0x00)
             setLeftMargin(0x50)
 
-            printNormalText(fweoioiwejgiowejgiojweiog)
+            printNormalText("fweoioiwejgiowejgiojweiog")
             printAndFeedN(0x00)
 
-            printNormalText(geiwjgoijwiojgwe)
+            printNormalText("geiwjgoijwiojgwe")
             printAndFeedN(0x02)
-            setLeftMargin(0x30)
-        }			
+            setLeftMargin(0x30)			
         
         printNormalText("Address:")
         printAndFeedN(0x00)
@@ -94,6 +93,7 @@ port.on('open', function() {
         printAndFeedN(0x04)
 
         printQR("testQR")
+	printAndFeedN(0x04)
         print()
         cutPaper()
         setTimeout(function(){
@@ -122,6 +122,10 @@ port.on('error', function(err) {
 
 function setCharacterFont(){
     write(Buffer.from([0x1B, 0x4D, 0x31]))
+}
+
+function setCharacterSpacing() {
+    write(Buffer.from([0x1B, 0x20, 0x02]))
 }
 
 //0x00 - DISABLED
@@ -405,7 +409,8 @@ function setLeftMargin(length) {
 }
 
 function printAndFeedN(n) {
-	write(Buffer.from([0x1B, 0x4A, n]))
+	//write(Buffer.from([0x1B, 0x4A, n]))
+	write(Buffer.from([0x1B, 0x64, n]))
 }
 
 function print() {
@@ -422,14 +427,14 @@ function cancelBold() {
 
 function setFontSizeX(n) {
 	let cmd = 0x66
-	if(n == 1) cmd = 0x00
-	if(n == 2) cmd = 0x11
-	if(n == 3) cmd = 0x22
-	if(n == 4) cmd = 0x33
-	if(n == 5) cmd = 0x44
-	if(n == 6) cmd = 0x55
-	if(n == 7) cmd = 0x66
-	if(n == 8) cmd = 0x77
+	if(n == 1) cmd = cmd = 0x00
+	if(n == 2) cmd = cmd = 0x11
+	if(n == 3) cmd = cmd = 0x22
+	if(n == 4) cmd = cmd = 0x33
+	if(n == 5) cmd = cmd = 0x44
+	if(n == 6) cmd = cmd = 0x55
+	if(n == 7) cmd = cmd = 0x66
+	if(n == 8) cmd = cmd = 0x77
 	write(Buffer.from([0x1D, 0x21, cmd]))
 }
 
@@ -438,8 +443,8 @@ function printNormalText(str) {
 }
 
 function cutPaper() {
-    // write(Buffer.from([0x1B, 0x69]))
-    write(Buffer.from([0x1C, 0x50, 0x0A, 0x01, 0x45, 0x05]))
+    write(Buffer.from([0x1B, 0x69]))
+    //write(Buffer.from([0x1C, 0x50, 0x0A, 0x01, 0x45, 0x05]))
 }
 
 function write(data) {
