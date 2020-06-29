@@ -2,7 +2,7 @@
   "name": "custom-printer",
   "version": "1.0.0",
   "description": "Custom branded printer library on NodeJS",
-  "main": "index.js",
+  "main": "custom.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
