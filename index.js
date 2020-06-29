@@ -8,6 +8,7 @@ const port = new SerialPort('/dev/ttyUSB1', {
   baudRate: 115200
 })
 
+
 function hex(str) {
     var arr = [];
     for (var i = 0, l = str.length; i < l; i ++) {
@@ -22,6 +23,7 @@ function hex(str) {
 }
 
 port.on('open', function() {
+    print("PORT OPEN")
     resetBuffer()
     setCharacterFont()
     setCenter()
@@ -97,9 +99,14 @@ port.on('open', function() {
         setTimeout(function(){
             closeSerialPort()
         }, 5000);
-        resolve()
     })
 })
+
+function closeSerialPort() {
+	if (port != null) {
+		port.close();
+	}
+}
 
 port.on('data', function(data) {
     console.log(data); 
@@ -432,7 +439,7 @@ function printNormalText(str) {
 
 function cutPaper() {
     // write(Buffer.from([0x1B, 0x69]))
-    write(Buffer.from([0x1C, 0x50, 0x0A, 0x01, 0x52, 0x05]))
+    write(Buffer.from([0x1C, 0x50, 0x0A, 0x01, 0x45, 0x05]))
 }
 
 function write(data) {
