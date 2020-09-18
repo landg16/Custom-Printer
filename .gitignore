@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# MacOS DS_STORE
+.DS_STORE
+
+# Ignore config files
+config.json

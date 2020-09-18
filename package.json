@@ -1,6 +1,6 @@
 {
   "name": "custom-printer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Custom branded printer library on NodeJS",
   "main": "index.js",
   "scripts": {
@@ -13,10 +13,19 @@
   ],
   "author": "Lasha Andghuladze",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/landg16/Custom-Printer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/landg16/Custom-Printer/issues"
+  },
+  "homepage": "https://github.com/landg16/Custom-Printer",
   "dependencies": {
-    "esc-pos-encoder": "^1.2.0",
-    "escpos": "^3.0.0-alpha.2",
-    "png-js": "^1.0.0",
+    "canvas": "^2.6.1",
+    "canvas-browserify": "^1.1.3",
+    "canvas-dither": "^1.0.1",
+    "canvas-flatten": "^1.0.1",
     "serialport": "^8.0.7"
   }
 }
