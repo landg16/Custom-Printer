@@ -4,7 +4,7 @@ Custom printer library written on serialport and canvas libraries. Tested only w
 
 ## 1. Installation
 
-### 1)  Install canvas pre-dependencies for using image printing on your printer.
+### 1)  Install canvas pre-dependencies for using image printing on your printer
 
 OS | Command
 ----- | -----
