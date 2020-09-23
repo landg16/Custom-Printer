@@ -2,7 +2,7 @@
 
 Custom printer library written on serialport and canvas libraries. Tested only with VKP-80III and K-80 models. K-80 is missing a lot's of features of VKP-80III.
 
-## 1. Installation
+## 1. Pre-installation
 
 ### 1)  Install canvas pre-dependencies for using image printing on your printer
 
@@ -19,7 +19,7 @@ Others | See the [wiki](https://github.com/Automattic/node-canvas/wiki)
 **Mac OS X v10.11+:** If you have recently updated to Mac OS X v10.11+ and are experiencing trouble when compiling, run the following command: `xcode-select --install`. Read more about the problem [on Stack Overflow](http://stackoverflow.com/a/32929012/148072).
 If you have xcode 10.0 or higher installed, in order to build from source you need NPM 6.4.1 or higher
 
-### 2.) Run npm install from console
+### 2.) Run npm install
 
 ```npm
 npm install
@@ -45,7 +45,9 @@ If portConfiguration is null, only commands will be printed on console.
 ## 2. Usage
 
 ```bash
-node index.js
+npm run test
 ```
+
+and it will print test print on your ESC-POS custom printer :) have fun.
 
 ### Pull requests are welcome :)

@@ -1,10 +1,10 @@
 {
   "name": "custom-printer",
-  "version": "1.1.0",
-  "description": "Custom branded printer library on NodeJS",
+  "version": "1.2.0",
+  "description": "Custom branded printer library on NodeJS for models VKP-80 and K-80 (also should work on TG models).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test && exit 0"
   },
   "keywords": [
     "custom",
